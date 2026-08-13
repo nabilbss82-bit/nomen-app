@@ -24,10 +24,14 @@ jobs:
 
     - name: Accept Android Licenses and Build
       run: |
+# إنشاء مجلد الرخص وقبولها تلقائياً
         mkdir -p ~/.android
         touch ~/.android/repositories.cfg
-        # قبول التراخيص آلياً عبر أدوات أندرويد
-        sdkmanager --licenses || true
+        
+        # تثبيت وaccept رخص الـ SDK يدويامن خلال أداة سطر الأوامر
+        yes | sdkmanager --licenses || true
+        
+        # بدء بناء التطبيق
         buildozer -v android debug
 
     - name: Upload APK
